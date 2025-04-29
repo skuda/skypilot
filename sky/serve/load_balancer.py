@@ -197,6 +197,9 @@ class SkyServeLoadBalancer:
                 response_or_exception = await self._proxy_request_to(
                     ready_replica_url, request)
             if not isinstance(response_or_exception, Exception):
+                # Only add to aggregator if status code is 2xx (success)
+                if 200 <= response_or_exception.status_code <= 299:
+                    self._request_aggregator.add(request)
                 return response_or_exception
             # When the user aborts the request during streaming, the request
             # will be disconnected. We do not need to retry for this case.

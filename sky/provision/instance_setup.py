@@ -298,7 +298,7 @@ def ray_head_start_command(custom_resource: Optional[str],
 
     cmd = (
         f'{constants.SKY_RAY_CMD} stop; '
-        'RAY_SCHEDULER_EVENTS=0 RAY_DEDUP_LOGS=0 '
+        'RAY_SCHEDULER_EVENTS=0 RAY_DEDUP_LOGS=0 RAY_memory_monitor_refresh_ms=0 '
         # worker_maximum_startup_concurrency controls the maximum number of
         # workers that can be started concurrently. However, it also controls
         # this warning message:
