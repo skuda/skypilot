@@ -303,6 +303,11 @@ def launch(cluster_name: str, node_type: str, instance_type: str, region: str,
         '$(prefix_cmd) chmod 700 ~/.ssh; '
         f'$(prefix_cmd) echo "{public_key}" >> ~/.ssh/authorized_keys; '
         '$(prefix_cmd) chmod 644 ~/.ssh/authorized_keys; '
+        '$(prefix_cmd) mkdir -p /root/.ssh; '
+        '$(prefix_cmd) chown -R root /root/.ssh;'
+        '$(prefix_cmd) chmod 700 /root/.ssh; '
+        f'echo "{public_key}" | $(prefix_cmd)  tee -a /root/.ssh/authorized_keys; '
+        '$(prefix_cmd) chmod 644 /root/.ssh/authorized_keys; '
         '$(prefix_cmd) service ssh restart; '
         '[ $(id -u) -eq 0 ] && echo alias sudo="" >> ~/.bashrc;sleep infinity')
     # Use base64 to deal with the tricky quoting issues caused by runpod API.

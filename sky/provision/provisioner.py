@@ -374,7 +374,7 @@ def wait_for_ssh(cluster_info: provision_common.ClusterInfo,
     ip_list = cluster_info.get_feasible_ips()
     port_list = cluster_info.get_ssh_ports()
 
-    timeout = 60 * 10  # 10-min maximum timeout
+    timeout = 3600 # 1 hour maximum timeout
     start = time.time()
     # use a queue for SSH querying
     ips = collections.deque(ip_list)

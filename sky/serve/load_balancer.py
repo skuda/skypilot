@@ -174,7 +174,6 @@ class SkyServeLoadBalancer:
     async def _proxy_with_retries(
             self, request: fastapi.Request) -> fastapi.responses.Response:
         """Try to proxy the request to the endpoint replica with retries."""
-        self._request_aggregator.add(request)
         # TODO(tian): Finetune backoff parameters.
         backoff = common_utils.Backoff(initial_backoff=1)
         # SkyServe supports serving on Spot Instances. To avoid preemptions
